@@ -1,23 +1,42 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+
+import UserHome from './pages/usersPage';
+import PostHome from './pages/postsPage';
+import Navigation from './components/navigation';
+import UserProvider from './providers/UserProvider';
+
 import './App.css';
 
 function App() {
+  const [page, setPage] = useState({
+    userHome: true,
+    postHome: false,
+  });
+  const [currentPage, setCurrentPage] = useState('userHome');
+
+  const onPageChange = (pageKey) => {
+    const updateActivePage = { ...page };
+    let newCurrentPage = '';
+    Object.keys(updateActivePage).forEach((key) => {
+      if (key === pageKey) {
+        updateActivePage[pageKey] = true;
+        newCurrentPage = pageKey;
+      } else {
+        updateActivePage[key] = false;
+      }
+    });
+
+    setCurrentPage(newCurrentPage);
+    setPage(updateActivePage);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Navigation onPageChange={onPageChange} pages={page} />
+      <UserProvider>
+        {page.userHome && <UserHome page={currentPage} />}
+      </UserProvider>
+      {page.postHome && <PostHome />}
     </div>
   );
 }
