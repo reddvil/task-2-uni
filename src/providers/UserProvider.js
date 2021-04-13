@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const users = await API_SERVICE_USER.getUsers({ limit: 7 });
+      const users = await API_SERVICE_USER.getUsers({ limit: 10 });
       setUsers(users);
     };
     fetchUsers();
