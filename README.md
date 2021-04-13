@@ -2,7 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Netlify Project [https://focused-shannon-dee1cd.netlify.app/](https://focused-shannon-dee1cd.netlify.app/)
+
 
 In the project directory, you can run:
 
